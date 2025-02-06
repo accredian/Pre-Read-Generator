@@ -6,11 +6,12 @@ from IPython.display import Markdown
 
 def main():
     st.sidebar.title("Configuration")
-    api_key = st.sidebar.text_input("Enter API key:", type="password")
+    api_key = st.sidebar.text_input("Enter App_API key:", type="password")
+    model = st.sidebar.text_input("Give model:", type="password")
+    serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
 
     st.title("CrewAI Pre-Read Document Generator")
 
-    # User input for API key
     # api_key = st.text_input("Enter API key:", type="password")
     topic = st.text_input("Enter the topic for documentation summarization:")
 
@@ -20,20 +21,20 @@ def main():
             return
 
         # Initialize Large Language Model (LLM) of your choice
-        llm = LLM(model="groq/gemma2-9b-it", api_key=api_key)
+        llm = LLM(model=f"groq/{model}", api_key=api_key)
+        #gemma2-9b-it - Use this model when they ask for model, so mug it won;t be tedious
 
-        # Create CrewAI agents
-        # Create CrewAI agents
+        # CrewAI agents.......@@@
         Research = Agent(
             role='Research Specialist',
             goal='Gather comprehensive information about the given topic',
             backstory='''Expert researcher with deep knowledge in computer science and technical topics who
                     gathers information for a beginner-friendly pre-read document for any given technical topic.
                     A pre-read which you work on is A concise and beginner-friendly resource designed to introduce students to a specific topic before a lecture,
-                    workshop, or course. It starts with Introduction of topic and provides an overview of the topic's key concepts,
+                    workshop. It starts with Introduction of topic and provides an overview of the topic's key concepts,
                     real-world applications, and foundational knowledge, using clear and accessible language. The goal of a pre-read document is
                     to prepare students with the necessary context, spark curiosity, and enhance their understanding of the subject during formal
-                    instruction. It often includes examples, analogies, and suggested resources for deeper exploration.''',
+                    instruction. It often includes examples, analogies, and links for examples for deeper exploration.''',
             llm=llm,
             verbose=True
         )
@@ -44,10 +45,10 @@ def main():
             backstory='''Expert researcher with deep knowledge in computer science and technical topics who
                     writes content for a beginner-friendly pre-read document for any given technical topic.
                     A pre-read which you work on is A concise and beginner-friendly resource designed to introduce students to a specific topic before a lecture,
-                    workshop, or course. It starts with Introduction of topic and provides an overview of the topic's key concepts,
+                    workshop, or reference links. It starts with Introduction of topic and provides an overview of the topic's key concepts,
                     real-world applications, and foundational knowledge, using clear and accessible language. The goal of a pre-read document is
                     to prepare students with the necessary context, spark curiosity, and enhance their understanding of the subject during formal
-                    instruction. It often includes examples, analogies, and suggested resources for deeper exploration.''',
+                    instruction. It often includes examples, analogies, and links and hyperlinks for examples wherever necessary in the script for deeper exploration.''',
             llm=llm,
             verbose=True
         )
@@ -58,20 +59,20 @@ def main():
             backstory='''Expert researcher with deep knowledge in computer science and technical topics who
                     reviews contents for a beginner-friendly pre-read document for any given technical topic.
                     A pre-read which you review on is A concise and beginner-friendly resource designed to introduce students to a specific topic before a lecture,
-                    workshop, or course. It starts with Introduction of topic and provides an overview of the topic's key concepts,
+                    workshop, or reference links. It starts with Introduction of topic and provides an overview of the topic's key concepts,
                     real-world applications, and foundational knowledge, using clear and accessible language. The goal of a pre-read document is
                     to prepare students with the necessary context, spark curiosity, and enhance their understanding of the subject during formal
-                    instruction. It often includes examples, analogies, and suggested resources for deeper exploration.''',
+                    instruction. It often includes examples, analogies, and links for examples for deeper exploration.''',
             llm=llm,
             verbose=True
         )
 
-        # Define tasks
+        # tasks
         research_task = Task(
                 description=f"""Research the topic: {topic}
                 Introduction: Provide a clear, engaging introduction to the topic. Explain what it is, why it’s important, and its relevance in today’s world.
                 Applications: Highlight real-world applications with specific examples that showcase the practical value of the topic.
-                References and Developments: Include recent advancements, academic sources, and practical use cases to support your findings with some reference links.""",
+                References and Developments: Include recent advancements, and practical use cases to support your findings with some reference links.""",
                 expected_output="""A detailed research report:
                 Each section (Introduction, Applications,references etc.) should be 2-3 paragraphs long, with clear headings.
                 Include bullet points, examples, and references where applicable.
@@ -86,8 +87,8 @@ def main():
                 1. Title and Introduction: Write an engaging title and provide an introductory section that captures the topic’s essence.
                 3. Real-World Applications: Include a section highlighting the topic’s practical applications, supported by relatable examples.
                 4. Key Concepts: Explain foundational concepts clearly, using simple language, analogies, or examples to help learners understand.
-                5. Suggested Readings and Resources: Include suggested books, videos or reference links for learners who want to dive deeper, 
-                    but not academic courses reference.
+                5. Suggested Readings and Resources: Include website links which give examples for people who want to dive deeper as well as
+                    add hyperlinks wherever necessary.
                 6. a) Use markdown with clear headings and subheadings for each section.
                   b) Include bullet points, lists, and visuals where applicable.
                   c) Write in an engaging and friendly tone, as if explaining to someone new to the topic.""",
@@ -95,7 +96,7 @@ def main():
                 1. Title and introduction
                 2. Detailed sections with clear headings
                 3. All sections in 4-5 paragraphs
-                4. Suggested readings and resources
+                4. Suggested readings and resources.
                 Format: Following the provided template structure.""",
                 agent=writer
             )
@@ -118,7 +119,7 @@ def main():
                   agent=reviewer
         )
 
-        # Create crew to manage workflow
+        # Crew Pipeline
         crew = Crew(
             agents=[Research, writer, reviewer],
             tasks=[research_task, writing_task, review_task],
