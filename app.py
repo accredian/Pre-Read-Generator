@@ -1,4 +1,4 @@
-%%writefile app.py
+# %%writefile app.py
 
 import streamlit as st
 from crewai import Agent, Task, Crew, LLM
@@ -7,7 +7,7 @@ from IPython.display import Markdown
 def main():
     st.sidebar.title("Configuration")
     api_key = st.sidebar.text_input("Enter App_API key:", type="password")
-    model = st.sidebar.text_input("Give model:", type="password")
+    # model = st.sidebar.text_input("Give model:", type="password")
     serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
 
     st.title("CrewAI Pre-Read Document Generator")
@@ -21,7 +21,7 @@ def main():
             return
 
         # Initialize Large Language Model (LLM) of your choice
-        llm = LLM(model=f"groq/{model}", api_key=api_key)
+        llm = LLM(model="groq/gemma2-9b-it", api_key=api_key)
         #gemma2-9b-it - Use this model when they ask for model, so mug it won;t be tedious
 
         # CrewAI agents.......@@@
