@@ -4,3 +4,4 @@
 !pip install langchain_groq
 !pip install crewai groq
 !pip install crewai[tools]
+!pip install groq
