@@ -10,7 +10,10 @@ from IPython.display import Markdown
 
 def main():
 
-    st.sidebar.title("About")
+    st.sidebar.title('''About : The Pre-Read Report Generator Agent is a
+    cutting-edge Streamlit application designed to streamline the process of generating comprehensive
+    technical reports. By leveraging the power of advanced AI models and APIs, this app empowers users
+    to produce well-structured reports effortlessly.''')
     
     st.sidebar.title("Configuration")
     api_key = st.sidebar.text_input("Enter Groq Cloud API Key:", type="password")
