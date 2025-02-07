@@ -11,7 +11,7 @@ from IPython.display import Markdown
 def main():
     st.sidebar.title("Configuration")
     api_key = st.sidebar.text_input("Enter Groq Cloud API Key:", type="password")
-    # model = st.sidebar.text_input("Give model:", type="password")
+    model = st.sidebar.text_input("Give model:", type="password")
     serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
 
     st.title("Pre-Read Document Generator")
