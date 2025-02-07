@@ -10,11 +10,11 @@ from IPython.display import Markdown
 
 def main():
     st.sidebar.title("Configuration")
-    api_key = st.sidebar.text_input("Enter App_API key:", type="password")
+    api_key = st.sidebar.text_input("Enter Groq Cloud API Key:", type="password")
     # model = st.sidebar.text_input("Give model:", type="password")
     serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
 
-    st.title("CrewAI Pre-Read Document Generator")
+    st.title("Pre-Read Document Generator")
 
     # api_key = st.text_input("Enter API key:", type="password")
     topic = st.text_input("Enter the topic for documentation summarization:")
