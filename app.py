@@ -17,7 +17,7 @@ def main():
     st.title("Pre-Read Document Generator")
 
     # api_key = st.text_input("Enter API key:", type="password")
-    topic = st.text_input("Enter the topic for documentation summarization:")
+    topic = st.text_input("Enter the topic:")
 
     if st.button("Generate Pre-Read Document"):
         if not api_key or not topic:
