@@ -9,6 +9,9 @@ from crewai import Agent, Task, Crew, LLM
 from IPython.display import Markdown
 
 def main():
+
+    st.sidebar.title("About")
+    
     st.sidebar.title("Configuration")
     api_key = st.sidebar.text_input("Enter Groq Cloud API Key:", type="password")
     serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
