@@ -11,9 +11,9 @@ from IPython.display import Markdown
 def main():
 
     # st.sidebar.title("About:")
-    # st.sidebar.text('''The Pre-Read Report Generator Agent is a
-    # cutting-edge Streamlit application designed to streamline the process of generating comprehensive
-    # technical reports. By leveraging the power of advanced AI models and APIs, this app empowers users
+    # st.sidebar.text('''The Pre-Read Generator is a
+    # cutting-edge AI Powered application designed to streamline the process of generating comprehensive
+    # technical reports on any specified topic. By leveraging the power of advanced AI models and APIs, this app empowers users
     # to produce well-structured reports effortlessly.''')
 
     st.markdown(
@@ -33,7 +33,7 @@ def main():
     st.sidebar.markdown(
     '<div class="sidebar-content">'
     '<h2>About:</h2>'
-    '<p>The Pre-Read Report Generator Agent is a cutting-edge Streamlit application designed to streamline the process of generating comprehensive technical reports. By leveraging the power of advanced AI models and APIs, this app empowers users to produce well-structured reports effortlessly.</p>'
+    '<p>The Pre-Read Generator is a cutting-edge AI Powered application designed to streamline the process of generating comprehensive technical reports on any specified topic. By leveraging the power of advanced AI models and APIs, this app empowers users to produce well-structured reports effortlessly.</p>'
     '</div>',
     unsafe_allow_html=True
     )
@@ -43,7 +43,7 @@ def main():
     serper_api_key = st.sidebar.text_input("Enter serper_API key:", type="password")
     model = st.sidebar.text_input("Give model:", type="password")
 
-    st.title("Pre-Read Document Generator")
+    st.title("Pre-Read Generator")
 
     # api_key = st.text_input("Enter API key:", type="password")
     topic = st.text_input("Enter the topic:")
