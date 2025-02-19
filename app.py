@@ -54,7 +54,7 @@ def main():
             return
 
         # Initialize Large Language Model (LLM) of your choice
-        llm = LLM(model="groq/gemma2-9b-it", api_key=api_key)
+        llm = LLM(model="groq/qwen-2.5-32b", api_key=api_key)
         #gemma2-9b-it - Use this model when they ask for model, so mug it won;t be tedious
 
         # CrewAI agents.......@@@
